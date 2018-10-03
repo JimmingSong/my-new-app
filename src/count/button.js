@@ -19,6 +19,7 @@ class CounterButton extends React.Component {
     render() {
         return (
             <button
+                className="btn"
                 color={this.props.color}
                 onClick={() => this.setState(state => ({count: state.count + 1}))}>
                 Count: {this.state.count}
