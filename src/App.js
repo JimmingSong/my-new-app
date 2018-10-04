@@ -42,6 +42,7 @@ class App extends Component {
   render() {
     return (
         <div className="App">
+            <div className="bordered"/>
             <FilterInput keyWord={this.state.keyWord} getKeyWord={this.setKeyWord}/>
             <List list={this.state.afterFilterData}/>
             {/*<header className="App-header">*/}
