@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 // connect方法的作用：将额外的props传递给组件，并返回新的组件，组件在该过程中不会受到影响
 import { connect } from 'react-redux'
 
+import {Button} from '@material-ui/core'
+
 // 引入action
-import {setPage, setNum, deleteList, addList, updateList} from "../../store/actions";
+import {setPage, setNum, deleteList, addList, updateList,deleteData} from "../../store/actions";
 
 class HandleBtn extends Component {
     constructor(props,context) {
@@ -32,12 +34,16 @@ class HandleBtn extends Component {
         let obj = {
             list:list,
             n:3,
-            num:12
         };
-
         updateList(obj)
     }
-
+    deleteList=()=>{
+        let {list,deleteData}= this.props;
+        let obj = {
+            list:list
+        };
+        deleteData(obj)
+    };
     componentDidMount(){
         console.log(this.props);
         // console.log(this.props);
@@ -56,15 +62,19 @@ class HandleBtn extends Component {
                 <ul>
                     {List}
                 </ul>
-                <button onClick={this.handleClick}>{this.context.text}</button>
-                <button onClick={this.update}>更新数据</button>
+                <Button variant={"contained"} onClick={this.handleClick} color={'secondary'}>{this.context.text}</Button>
+                {/*<button onClick={this.handleClick}>{this.context.text}</button>*/}
+                <Button variant={"outlined"} onClick={this.update} color={"primary"}>{this.context.update}</Button>
+                <Button variant={"flat"} onClick={this.deleteList}>delete</Button>
+                {/*<button onClick={this.update}>更新数据</button>*/}
             </div>
         )
     }
 }
 
 HandleBtn.contextTypes = {
-    text:PropTypes.string
+    text:PropTypes.string,
+    update:PropTypes.string
 };
 
 // mapStateToProps：将state映射到组件的props中
@@ -101,6 +111,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         updateList(data){
             dispatch(updateList(data))
+        },
+        deleteData(data){
+            dispatch(deleteData(data))
         }
     }
 }

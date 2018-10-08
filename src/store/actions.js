@@ -38,7 +38,16 @@ export function addList(data) {
 export function updateList(obj) {
     return (dispatch,getState)=>{
         let arr = obj.list.slice();
-        arr.splice(obj.n,1,obj.num);
+        let num = ++obj.list[obj.n];
+        arr.splice(obj.n,1,num);
         dispatch({type:'update_list',data:arr})
+    }
+}
+
+export function deleteData(obj) {
+    return (dispatch,getState)=>{
+        let arr = obj.list.slice();
+        arr.splice(arr.length-1,1);
+        dispatch({type:'delete_list',data:arr})
     }
 }

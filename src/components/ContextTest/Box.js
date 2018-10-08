@@ -31,8 +31,14 @@ class Box extends Component {
         super(props);
         this.state = {
             anchorEl:null,
-            mobileMoreAnchorEl:null
+            mobileMoreAnchorEl:null,
+            isShow:true
         }
+    };
+
+    changeIsShow = ()=>{
+        let show = !this.state.isShow;
+      this.setState({isShow:show})
     };
     handleProfileMenuOpen= e => {
         this.setState({anchorEl:e.currentTarget})
@@ -54,23 +60,32 @@ class Box extends Component {
      * 给context中添加数据
      */
     getChildContext(){
-        return {text: "purple"};
+        return {
+            text: "purple",
+            update:'更新数据'
+        };
     };
 
     render() {
         const {classes} = this.props;
-        console.log(classes);
+        let {isShow} = this.state;
+        let Btn = null;
+        if (isShow){
+            Btn = <Button color="primary" variant='contained' className={classes.button} onClick={this.changeIsShow}>change</Button>
+        }else{
+            Btn = <Button color="secondary" variant='contained' className={classes.button} onClick={this.changeIsShow}>change</Button>
+        }
         return (
                 <div>
                     <AppBar position="static" color={"default"}><span>dfdf</span></AppBar>
-                    <Button color="primary" variant='contained'>按钮</Button>
-                    <Button color="secondary" variant='contained' className={classes.button}>按钮</Button>
+                    {Btn}
                     <Button color="secondary" variant='contained' disabled>按钮</Button>
                     <input
                         accept="image/*"
                         id="contained-button-file"
                         multiple
-                        style={{display:'none'}}
+                        className={classes.input}
+                        // style={{display:'none'}}
                         type="file"
                     />
                     <label htmlFor="contained-button-file">
@@ -96,6 +111,7 @@ class Box extends Component {
  */
 Box.childContextTypes = {
     text: PropTypes.string,
+    update:PropTypes.string
 };
 
 Box.propTypes = {

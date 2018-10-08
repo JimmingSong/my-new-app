@@ -11,7 +11,10 @@ class CounterButton extends React.Component {
         super(props);
         this.state = {count: 1};
     }
-
+    addCount = ()=>{
+        let num = this.state.count;
+        this.setState({count:++num})
+    }
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.color !== nextProps.color) {
             return true;
@@ -31,7 +34,7 @@ class CounterButton extends React.Component {
                 <button
                     className="btn"
                     color={this.props.color}
-                    onClick={() => this.setState(state => ({count: state.count + 1}))}>
+                    onClick={this.addCount}>
                     Count: {this.state.count}
                 </button>
             </div>
