@@ -19,13 +19,11 @@ class HandleBtn extends Component {
     };
 
     handleClick(){
-        let {page, num,list, setPage, setNum, deleteState,addList} = this.props;
+        let {page, num,list, setPage, setNum,addList} = this.props;
         let val = page==='新标题'?'首页':'新标题';
         setPage(val);
         let count = ++num;
         setNum(count);
-        // let li = list.splice(list.length-1,1);
-        // deleteState(list);
         addList(list)
     }
 
@@ -62,6 +60,7 @@ class HandleBtn extends Component {
                 <ul>
                     {List}
                 </ul>
+                
                 <Button variant={"contained"} onClick={this.handleClick} color={'secondary'}>{this.context.text}</Button>
                 {/*<button onClick={this.handleClick}>{this.context.text}</button>*/}
                 <Button variant={"outlined"} onClick={this.update} color={"primary"}>{this.context.update}</Button>
